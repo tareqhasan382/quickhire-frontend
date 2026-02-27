@@ -12,3 +12,28 @@
 @theme {
   --font-rubik:"Rubik", sans-serif;
 }
+
+.input {
+  @apply w-full px-4 py-3 rounded-xl border border-gray-300 
+  bg-gray-50 text-gray-800 placeholder-gray-400
+  focus:outline-none focus:ring-2 focus:ring-blue-500 
+  focus:border-blue-500 transition duration-200;
+}
+
+.input:hover {
+  @apply border-blue-400;
+}
+
+.primary-btn {
+  @apply bg-blue-600 hover:bg-blue-700 text-white font-semibold 
+  py-3 rounded-xl transition duration-200 shadow-lg;
+}
+
+.primary-btn:active {
+  @apply scale-[0.98];
+}
+
+.social-btn {
+  @apply flex items-center justify-center gap-2 w-full py-3 
+  border rounded-xl hover:bg-gray-100 transition duration-200;
+}
