@@ -6,6 +6,7 @@ interface ContainerProps {
 }
 
 const Container = ({ children, className = "" }: ContainerProps) => {
+  // max-w-[1192px]
   return (
     <div className={`mx-auto w-full  ${className}`}>
       {children}
