@@ -4,13 +4,13 @@ import { Search, MapPin } from "lucide-react";
 
 const Header = () => {
   return (
-    <section className="w-full -mt-10 pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white">
+    <section className="w-full -mt-10 pt-10 pb-20 bg-gradient-to-b from-blue-50 to-white">
       <Container className="max-w-[1192px] px-4 sm:px-6 lg:px-8">
         
         <div className="relative grid md:grid-cols-2 gap-12 items-center">
           
           {/* Left Side */}
-          <div className="space-y-8 relative">
+          <div className="md:space-y-8 space-y-12 relative">
             
             {/* Heading */}
             <div className="space-y-6">
@@ -26,7 +26,7 @@ const Header = () => {
             </div>
 
             {/* 🔥 Search Box (Overlay Version) */}
-            <div className="absolute top-[220px] md:top-[340px] left-0 w-[130%] z-20">
+            <div className="absolute top-[250px] md:top-[340px] left-0 md:w-[130%] w-[100%] z-20">
               <div className="bg-white shadow-2xl rounded-2xl p-5">
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   
@@ -53,15 +53,15 @@ const Header = () => {
 
                   {/* Button */}
                   <button className="w-full md:w-auto shrink-0 whitespace-nowrap bg-blue-600 text-white px-10 py-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
-  Search Job
+  Search my job
 </button>
 
                 </div>
               </div>
             </div>
 
-            {/* Popular Tags */}
-            <div className="pt-40">
+            {/* Popular Tags pt-40*/}
+            <div className="pt-48 md:pt-40">
               <p className="text-gray-500 text-sm">
                 Popular:{" "}
                 <span className="text-gray-700 font-medium">
