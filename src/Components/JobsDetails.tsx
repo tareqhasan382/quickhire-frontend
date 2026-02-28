@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Container from "./Container";
 import { useCreateJobMutation, useGetJobByIdQuery } from "../Redux/jobs/jobsApi";
 import { useCreateApplicationMutation } from "../Redux/application/applicationApi";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Redux/store";
 
 const JobsDetails = () => {
+  const navigate = useNavigate();
+  const auth = useSelector((state: RootState) => state.auth);
   const { id } = useParams<{ id: string }>();
   const { data: job, isLoading, isError } = useGetJobByIdQuery(id || "");
 
@@ -29,6 +33,9 @@ const JobsDetails = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!auth?.accessToken || !auth.user){
+      return navigate("/login")
+    }
     if (!job?.data?._id) return;
 
     try {
@@ -46,7 +53,7 @@ const JobsDetails = () => {
   if (isError || !job) return <p className="text-red-500 text-center mt-10">Job not found.</p>;
 
   return (
-    <section className="py-24 bg-gray-50">
+    <section className="py-24 bg-gray-50 px-2">
       <Container className="max-w-[800px]">
         <div className="bg-white p-8 rounded-2xl shadow-md space-y-4">
           <h1 className="text-3xl font-bold text-gray-900">{job.data.title}</h1>
@@ -70,7 +77,7 @@ const JobsDetails = () => {
 
       {/* Apply Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-2">
           <div className="bg-white rounded-xl w-full max-w-md p-6 relative">
             <button
               onClick={handleCloseModal}

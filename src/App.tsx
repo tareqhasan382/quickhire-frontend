@@ -7,7 +7,7 @@ import LatestJobsOpen from "./Components/LatestJobsOpen";
 
 function App() {
   return (
-    <div className=" w-full bg-amber-500 ">
+    <div className=" w-full ">
       <Header/>
       <CompaniesAdd/>
       <Category/>

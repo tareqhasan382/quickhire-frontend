@@ -5,6 +5,7 @@ import { MapPin, Briefcase } from "lucide-react";
 import { useGetJobsQuery } from "../Redux/jobs/jobsApi";
 import { setTitleFilter, setLocationFilter, setPage } from "../Redux/jobs/jobsSlice";
 import type { RootState } from "../Redux/store";
+import Skeleton from "../Components/Skeletons";
 
 const Jobs = () => {
   const dispatch = useDispatch();
@@ -85,7 +86,10 @@ const Jobs = () => {
 
         {/* Jobs Grid */}
         {isLoading ? (
-          <p className="text-gray-500">Loading jobs...</p>
+          <div>
+            <Skeleton variant="category-grid" />
+            <Skeleton variant="category-grid" />
+          </div>
         ) : isError || !data ? (
           <p className="text-red-500">Failed to load jobs.</p>
         ) : (

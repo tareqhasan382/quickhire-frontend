@@ -6,6 +6,8 @@ import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Jobs from "../pages/Jobs";
 import JobsDetails from "../Components/JobsDetails";
+import Dashboard from "../pages/Dashboard";
+import ProtectedRoute from "../Components/ProtectedRoute";
 
 const routes = createBrowserRouter([
     {
@@ -31,6 +33,16 @@ const routes = createBrowserRouter([
                 element: (
 
                     <Signup />
+
+                ),
+            },
+             {
+                path: "/dashboard",
+                element: (
+
+                    <ProtectedRoute allowedRoles={["admin"]}>
+                        <Dashboard />
+                    </ProtectedRoute>
 
                 ),
             },
