@@ -28,7 +28,7 @@ const Login = () => {
   const auth = useSelector((state: RootState) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
 
-  const [login, { isLoading, isError, error }] = useLoginMutation();
+  const [login, { isLoading, isError }] = useLoginMutation();
 
   const {
     register,
