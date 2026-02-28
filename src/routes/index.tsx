@@ -5,6 +5,7 @@ import NotFound from "../pages/NotFound";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
 import Jobs from "../pages/Jobs";
+import JobsDetails from "../Components/JobsDetails";
 
 const routes = createBrowserRouter([
     {
@@ -38,6 +39,14 @@ const routes = createBrowserRouter([
                 element: (
 
                     <Jobs />
+
+                ),
+            },
+             {
+                path: "/jobs/:id",
+                element: (
+
+                    <JobsDetails />
 
                 ),
             },

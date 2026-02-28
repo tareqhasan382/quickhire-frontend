@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Container from "./Container";
 import {
   Palette,
@@ -12,6 +13,7 @@ import {
 } from "lucide-react";
 
 const Category = () => {
+  const navigate = useNavigate();
   const categories = [
     { name: "Design", jobs: 235, icon: Palette },
     { name: "Sales", jobs: 180, icon: ShoppingCart },
@@ -38,7 +40,7 @@ const Category = () => {
             </p>
           </div>
 
-          <button className="flex items-center gap-2 text-blue-600 font-medium hover:gap-3 transition-all">
+          <button onClick={()=>navigate("/jobs")} className="flex items-center gap-2 text-blue-600 font-medium hover:gap-3 transition-all">
             Show all jobs
             <ArrowUpRight size={18} />
           </button>

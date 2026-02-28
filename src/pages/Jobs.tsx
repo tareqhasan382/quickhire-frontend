@@ -1,22 +1,24 @@
 import { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import Container from "../Components/Container";
 import { MapPin, Briefcase } from "lucide-react";
-import { useGetJobsQuery, type JobQueryParams } from "../Redux/jobs/jobsApi";
+import { useGetJobsQuery } from "../Redux/jobs/jobsApi";
+import { setTitleFilter, setLocationFilter, setPage } from "../Redux/jobs/jobsSlice";
+import type { RootState } from "../Redux/store";
 
 const Jobs = () => {
-  const [filters, setFilters] = useState<JobQueryParams>({
-    page: 1,
-    limit: 9,
-    title: "",
-    location: "",
-  });
+  const dispatch = useDispatch();
 
-  const [searchTerm, setSearchTerm] = useState("");
+  // Get filters from Redux
+  const filters = useSelector((state: RootState) => state.jobs.filters);
 
-  // Debounce state
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  // Local search term for debounce
+  const [searchTerm, setSearchTerm] = useState(filters.title);
 
-  // Apply debounce
+  // Debounced search term
+  const [debouncedSearch, setDebouncedSearch] = useState(filters.title);
+
+  // Debounce the search input
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedSearch(searchTerm);
@@ -25,33 +27,36 @@ const Jobs = () => {
     return () => clearTimeout(handler);
   }, [searchTerm]);
 
-  // Update filters when debounced search changes
+
   useEffect(() => {
-    setFilters((prev) => ({ ...prev, title: debouncedSearch, page: 1 }));
-  }, [debouncedSearch]);
+    dispatch(setTitleFilter(debouncedSearch || ""));
+    dispatch(setPage(1)); 
+  }, [debouncedSearch, dispatch]);
 
-  const { data, isLoading, isError, refetch } = useGetJobsQuery(filters);
 
+  const { data, isLoading, isError } = useGetJobsQuery(
+    { ...filters }, 
+    { refetchOnMountOrArgChange: true } 
+  );
+
+  // Handlers
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
   const handleLocationChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFilters({ ...filters, location: e.target.value, page: 1 });
+    dispatch(setLocationFilter(e.target.value));
+    dispatch(setPage(1));
   };
 
   const handlePageChange = (newPage: number) => {
-    setFilters({ ...filters, page: newPage });
+    dispatch(setPage(newPage));
   };
-
-  // Refetch when filters change
-  useEffect(() => {
-    refetch();
-  }, [filters]);
 
   return (
     <section className="w-full py-24 bg-gray-50">
       <Container className="max-w-[1192px] px-4 sm:px-6 lg:px-8">
+        {/* Title */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">All Jobs</h1>
           <p className="text-gray-600">Browse jobs by title or location</p>
@@ -86,15 +91,13 @@ const Jobs = () => {
         ) : (
           <>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {data.data.map((job) => (
+              {data?.data?.map((job) => (
                 <div
                   key={job._id}
                   className="bg-white rounded-2xl shadow-md hover:shadow-lg transition p-6 flex flex-col justify-between"
                 >
                   <div className="space-y-3">
-                    <h2 className="text-xl font-semibold text-gray-900">
-                      {job.title}
-                    </h2>
+                    <h2 className="text-xl font-semibold text-gray-900">{job.title}</h2>
                     <p className="text-gray-600">{job.company}</p>
 
                     <div className="flex items-center gap-4 text-gray-500 text-sm">
@@ -115,22 +118,21 @@ const Jobs = () => {
 
             {/* Pagination */}
             <div className="flex justify-center mt-8 gap-2">
-              {Array.from(
-                { length: Math.ceil(data.meta.total / data.meta.limit) },
-                (_, i) => i + 1
-              ).map((pageNum) => (
-                <button
-                  key={pageNum}
-                  onClick={() => handlePageChange(pageNum)}
-                  className={`px-4 py-2 rounded-lg ${
-                    pageNum === filters.page
-                      ? "bg-blue-600 text-white"
-                      : "bg-white text-gray-700 border"
-                  }`}
-                >
-                  {pageNum}
-                </button>
-              ))}
+              {Array.from({ length: Math.ceil(data.meta.total / data.meta.limit) }, (_, i) => i + 1).map(
+                (pageNum) => (
+                  <button
+                    key={pageNum}
+                    onClick={() => handlePageChange(pageNum)}
+                    className={`px-4 py-2 rounded-lg ${
+                      pageNum === filters.page
+                        ? "bg-blue-600 text-white"
+                        : "bg-white text-gray-700 border"
+                    }`}
+                  >
+                    {pageNum}
+                  </button>
+                )
+              )}
             </div>
           </>
         )}

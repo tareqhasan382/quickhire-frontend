@@ -26,6 +26,7 @@ export interface Job {
   updatedAt: string;
 }
 
+
 /* ===== API Response ===== */
 export interface JobsResponse {
   statusCode: number;
@@ -38,7 +39,12 @@ export interface JobsResponse {
   };
   data: Job[];
 }
-
+export interface JobResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: Job;
+}
 export const jobsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     /* ===== Get All Jobs ===== */
@@ -52,7 +58,7 @@ export const jobsApi = baseApi.injectEndpoints({
     }),
 
     /* ===== Get Single Job ===== */
-    getJobById: builder.query<Job, string>({
+    getJobById: builder.query<JobResponse, string>({
       query: (id) => `/job/${id}`,
       providesTags: ["jobs"],
     }),
