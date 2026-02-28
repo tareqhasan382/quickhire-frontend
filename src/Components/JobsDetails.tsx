@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import Container from "./Container";
 import { useCreateJobMutation, useGetJobByIdQuery } from "../Redux/jobs/jobsApi";
+import { useCreateApplicationMutation } from "../Redux/application/applicationApi";
 
 const JobsDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,7 +21,7 @@ const JobsDetails = () => {
     cover_note: "",
   });
 
-  const [applyJob, { isLoading: isApplying }] = useCreateJobMutation();
+  const [createApplication, { isLoading: isApplying }] = useCreateApplicationMutation();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -31,7 +32,7 @@ const JobsDetails = () => {
     if (!job?.data?._id) return;
 
     try {
-      //await applyJob({ job_id: job.data._id, ...form }).unwrap();
+      await createApplication({ job_id: job.data._id, ...form }).unwrap();
       alert("Application submitted successfully!");
       setForm({ name: "", email: "", resume_link: "", cover_note: "" });
       handleCloseModal();
