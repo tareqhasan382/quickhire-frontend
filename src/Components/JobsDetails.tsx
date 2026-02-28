@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Container from "./Container";
-import { useCreateJobMutation, useGetJobByIdQuery } from "../Redux/jobs/jobsApi";
+import { useGetJobByIdQuery } from "../Redux/jobs/jobsApi";
 import { useCreateApplicationMutation } from "../Redux/application/applicationApi";
 import { useSelector } from "react-redux";
 import type { RootState } from "../Redux/store";
