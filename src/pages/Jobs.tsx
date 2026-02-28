@@ -6,10 +6,11 @@ import { useGetJobsQuery } from "../Redux/jobs/jobsApi";
 import { setTitleFilter, setLocationFilter, setPage } from "../Redux/jobs/jobsSlice";
 import type { RootState } from "../Redux/store";
 import Skeleton from "../Components/Skeletons";
+import { useNavigate } from "react-router-dom";
 
 const Jobs = () => {
   const dispatch = useDispatch();
-
+ const navigate = useNavigate();
   // Get filters from Redux
   const filters = useSelector((state: RootState) => state.jobs.filters);
 
@@ -113,7 +114,7 @@ const Jobs = () => {
                     </div>
                   </div>
 
-                  <button className="mt-4 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">
+                  <button onClick={() => navigate(`/jobs/${job._id}`)} className="mt-4 bg-blue-600 text-white font-semibold py-2 rounded-lg hover:bg-blue-700 transition">
                     View Details
                   </button>
                 </div>

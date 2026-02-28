@@ -38,7 +38,7 @@ export const applicationApi = baseApi.injectEndpoints({
     /* ===== Create Application ===== */
     createApplication: builder.mutation<ApplicationResponse, Partial<Application>>({
       query: (data) => ({
-        url: "/application",
+        url: "/applications",
         method: "POST",
         body: data,
       }),
@@ -48,7 +48,7 @@ export const applicationApi = baseApi.injectEndpoints({
     /* ===== Get All Applications ===== */
     getApplications: builder.query<ApplicationsResponse, { page?: number; limit?: number }>({
       query: (params) => ({
-        url: "/application",
+        url: "/applications",
         method: "GET",
         params,
       }),
@@ -57,14 +57,14 @@ export const applicationApi = baseApi.injectEndpoints({
 
     /* ===== Get Single Application ===== */
     getApplicationById: builder.query<ApplicationResponse, string>({
-      query: (id) => `/application/${id}`,
+      query: (id) => `/applications/${id}`,
       providesTags: ["applications"],
     }),
 
     /* ===== Update Application ===== */
     updateApplication: builder.mutation<ApplicationResponse, { id: string; data: Partial<Application> }>({
       query: ({ id, data }) => ({
-        url: `/application/${id}`,
+        url: `/applications/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -74,7 +74,7 @@ export const applicationApi = baseApi.injectEndpoints({
     /* ===== Delete Application ===== */
     deleteApplication: builder.mutation<{ success: boolean }, string>({
       query: (id) => ({
-        url: `/application/${id}`,
+        url: `/applications/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["applications"],

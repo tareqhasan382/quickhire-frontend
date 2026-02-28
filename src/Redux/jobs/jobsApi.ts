@@ -50,7 +50,7 @@ export const jobsApi = baseApi.injectEndpoints({
     /* ===== Get All Jobs ===== */
     getJobs: builder.query<JobsResponse, JobQueryParams>({
       query: (params) => ({
-        url: "/job",
+        url: "/jobs",
         method: "GET",
         params,
       }),
@@ -59,14 +59,14 @@ export const jobsApi = baseApi.injectEndpoints({
 
     /* ===== Get Single Job ===== */
     getJobById: builder.query<JobResponse, string>({
-      query: (id) => `/job/${id}`,
+      query: (id) => `/jobs/${id}`,
       providesTags: ["jobs"],
     }),
 
     /* ===== Create Job (Admin) ===== */
     createJob: builder.mutation<Job, Partial<Job>>({
       query: (data) => ({
-        url: "/job",
+        url: "/jobs",
         method: "POST",
         body: data,
       }),
@@ -76,7 +76,7 @@ export const jobsApi = baseApi.injectEndpoints({
     /* ===== Update Job ===== */
     updateJob: builder.mutation<Job, { id: string; data: Partial<Job> }>({
       query: ({ id, data }) => ({
-        url: `/job/${id}`,
+        url: `/jobs/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -86,7 +86,7 @@ export const jobsApi = baseApi.injectEndpoints({
     /* ===== Delete Job ===== */
     deleteJob: builder.mutation<{ success: boolean }, string>({
       query: (id) => ({
-        url: `/job/${id}`,
+        url: `/jobs/${id}`,
         method: "DELETE",
       }),
       invalidatesTags: ["jobs"],
