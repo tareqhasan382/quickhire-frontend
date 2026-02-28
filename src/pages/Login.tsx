@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa6";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
@@ -10,6 +10,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import authImage from "../assets/data_security.jpg";
 import { useLoginMutation } from "../Redux/authApi";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Redux/store";
 
 /* =========================
    ZOD SCHEMA
@@ -23,6 +25,7 @@ type LoginFormData = z.infer<typeof loginSchema>;
 
 const Login = () => {
   const navigate = useNavigate();
+  const auth = useSelector((state: RootState) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
 
   const [login, { isLoading, isError, error }] = useLoginMutation();
@@ -53,7 +56,18 @@ const Login = () => {
       console.error("Login failed", err);
     }
   };
+  
 
+  useEffect(() => {
+    if (auth?.accessToken && auth.user) {
+      // Redirect based on role
+      if (auth.user.role === "admin") {
+        navigate("/dashboard", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+    }
+  }, [auth, navigate]);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <div className="bg-white rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col md:flex-row">

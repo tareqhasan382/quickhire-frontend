@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebookF } from "react-icons/fa6";
 import { FiMail, FiLock, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
@@ -12,9 +12,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import toast from "react-hot-toast";
 import { signupSchema, type SignupFormData } from "../validations/signup.validation";
+import { useSelector } from "react-redux";
+import type { RootState } from "../Redux/store";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const auth = useSelector((state: RootState) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
 
   const [signup] = useSignupMutation();
@@ -47,7 +50,16 @@ const Signup = () => {
       );
     }
   };
-
+  useEffect(() => {
+    if (auth?.accessToken && auth.user) {
+      // Redirect based on role
+      if (auth.user.role === "admin") {
+        navigate("/dashboard", { replace: true });
+      } else {
+        navigate("/", { replace: true });
+      }
+    }
+  }, [auth, navigate]);
   return (
     <div className="min-h-screen flex items-center justify-center px-4 bg-gray-50">
       <div className="bg-white rounded-3xl shadow-2xl max-w-5xl w-full overflow-hidden flex flex-col md:flex-row">
