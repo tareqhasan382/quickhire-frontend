@@ -1,228 +1,46 @@
-# (QuickHire) Simple Job Board Application
+# QuickHire Frontend
 
-A full-stack **Job Portal** application where admins can create and manage job posts, and users can browse jobs and apply with their details and resume.
+React SPA for the QuickHire job portal — public job search, job details with an apply flow, and role-based dashboards for candidates, recruiters, and admins.
 
-This project demonstrates **role-based access**, **dashboard management**, and **modern React + Redux Toolkit Query** architecture.
+## Tech Stack
 
----
+- React 19 + TypeScript
+- Vite + Tailwind CSS v4
+- TanStack React Query (server state), Zustand (auth, saved jobs)
+- React Hook Form + Zod (forms & validation)
+- React Router 7, Recharts, Framer Motion, sonner (toasts), lucide-react
 
-## ✨ Features
-
-### 👤 User
-
-* View all available jobs
-* View job details
-* Apply to jobs with:
-
-    * Name
-    * Email
-    * Resume link
-    * Cover note
-
-### 🛠 Admin Dashboard
-
-* Create new job posts
-* Delete jobs with confirmation popup
-* View job listings in a table
-* See how many applications each job has received
-* Enum-based job categories & location types
-* Protected dashboard (Admin only)
-
----
-
-## 🧱 Tech Stack
-
-### Frontend
-
-* **React + TypeScript**
-* **Redux Toolkit Query (RTK Query)**
-* **React Router v6**
-* **Tailwind CSS**
-* **react-hot-toast**
-
-### Backend
-
-* **Node.js**
-* **Express.js**
-* **MongoDB + Mongoose**
-* **Zod (validation)**
-* **JWT Authentication**
-
----
-
-
-
-## 🏷 Enums Used
-
-### Job Categories
-
-```ts
-Frontend
-Backend
-Fullstack
-DevOps
-Mobile
-Data Science
-Machine Learning
-AI Engineer
-Cloud Engineer
-Cyber Security
-QA / Testing
-UI / UX
-Product Manager
-Game Developer
-Blockchain
-```
-
-### Job Location Types
-
-```ts
-Remote
-Onsite
-Hybrid
-```
-
----
-
-## ⚙️ Environment Variables
-
-### Frontend (`.env`)
-
-```env
-VITE_API_BASE_URL=http://localhost:5000/api/v1
-```
-
-> Used in RTK Query `baseApi` for API calls.
-
----
-
-### Backend (`.env`)
-
-```env
-PORT=5000
-DATABASE_URL=mongodb://localhost:27017/job-portal
-JWT_SECRET=your_jwt_secret
-JWT_EXPIRES_IN=7d
-```
-
----
-
-## 🚀 Run Project Locally
-
-### 1️⃣ Clone the repository
+## Getting Started
 
 ```bash
-git clone https://github.com/tareqhasan382/quickhire-backend.git
-cd quickhire-backend
-```
-
----
-
-### 2️⃣ Run Backend
-
-```bash
-cd quickhire-backend
 npm install
-npm run dev
+npm run dev     # http://localhost:5173
 ```
 
-Backend will run on:
+Set `VITE_API_BASE_URL` in `.env` (default `http://localhost:5000/api`). Demo quick-fill login values come from `VITE_DEMO_*`.
 
-```
-http://localhost:5000
-```
+Scripts:
 
----
+- `npm run dev` — start dev server
+- `npm run build` — typecheck + production build (`dist/`)
+- `npm run lint` — ESLint
+- `npm run preview` — preview the production build
 
-### 3️⃣ Run Frontend
+## Structure
 
-```bash
-git clone https://github.com/tareqhasan382/quickhire-frontend.git
-cd quickhire-frontend
+- `src/pages/` — public pages (home, job search, job details, auth)
+- `src/features/` — per-role modules: `landing`, `jobs`, `candidate`, `recruiter`, `admin`
+- `src/components/` — shared layout & UI components
+- `src/services/` — HTTP client, mappers, API services
+- `src/store/` — Zustand stores (auth, saved jobs)
+- `src/routes/` — route definitions with protected, role-based routing
 
-npm install
-npm run dev
-```
+## Demo Accounts
 
-Frontend will run on:
+| Role      | Email                    | Password      |
+| --------- | ------------------------ | ------------- |
+| Admin     | `admin@quickhire.app`    | `password123` |
+| Recruiter | `recruiter@quickhire.app`| `password123` |
+| Candidate | `candidate@quickhire.app`| `password123` |
 
-```
-http://localhost:5173
-```
-
----
-
-## 🔐 Authentication & Authorization
-
-```
-admin 
- {
-  "email": "admin@example.com",
-  "password": "12345678"
-}
-
-user 
- {
-  "email": "user@example.com",
-  "password": "12345678"
-}
-```
-* JWT based authentication
-* `ProtectedRoute` ensures:
-
-    * Only authenticated users can access dashboard
-    * Admin-only access enforced on backend
-* Role-based access (`admin`, `user`)
-
----
-
-## 📌 API Endpoints (Sample)
-
-### Jobs
-
-```
-GET    /api/v1/job
-GET    /api/v1/job/:id
-POST   /api/v1/job        (admin)
-DELETE /api/v1/job/:id    (admin)
-```
-
-### Applications
-
-```
-POST /api/v1/applications
-GET  /api/v1/applications
-```
-
----
-
-## 🧪 Error Handling
-
-* Form validation before submission
-* Toast notifications for:
-
-    * Success
-    * Failure
-* Safe API error handling using `.unwrap()`
-
----
-
-## 📈 Why This Project Matters
-
-This project demonstrates:
-
-* Scalable frontend architecture
-* Clean RTK Query usage
-* Real SaaS dashboard patterns
-* Production-ready form handling
-* Enum-safe data modeling
-* Professional UI/UX decisions
-
----
-
-## 👨‍💻 Author
-
-**Tareq Hasan**
-
----
-
+The login page has quick-fill buttons for each role (values from `frontend/.env`). Start the backend first — see `../backend/README.md`.

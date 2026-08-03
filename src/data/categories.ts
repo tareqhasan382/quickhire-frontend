@@ -1,0 +1,36 @@
+import {
+  Code2,
+  Server,
+  Layers,
+  Database,
+  Smartphone,
+  LineChart,
+  Brain,
+  Bot,
+  Cloud,
+  ShieldCheck,
+  Bug,
+  Palette,
+  Briefcase,
+  Gamepad2,
+  Blocks,
+} from 'lucide-react'
+import type { JobCategory } from '../types'
+
+export const categories: JobCategory[] = [
+  { id: 'c1', name: 'Frontend', slug: 'frontend', icon: Code2, openPositions: 1240 },
+  { id: 'c2', name: 'Backend', slug: 'backend', icon: Server, openPositions: 1120 },
+  { id: 'c3', name: 'Fullstack', slug: 'fullstack', icon: Layers, openPositions: 880 },
+  { id: 'c4', name: 'DevOps', slug: 'devops', icon: Database, openPositions: 540 },
+  { id: 'c5', name: 'Mobile', slug: 'mobile', icon: Smartphone, openPositions: 460 },
+  { id: 'c6', name: 'Data Science', slug: 'data-science', icon: LineChart, openPositions: 610 },
+  { id: 'c7', name: 'Machine Learning', slug: 'machine-learning', icon: Brain, openPositions: 520 },
+  { id: 'c8', name: 'AI Engineer', slug: 'ai-engineer', icon: Bot, openPositions: 490 },
+  { id: 'c9', name: 'Cloud Engineer', slug: 'cloud-engineer', icon: Cloud, openPositions: 380 },
+  { id: 'c10', name: 'Cyber Security', slug: 'cyber-security', icon: ShieldCheck, openPositions: 310 },
+  { id: 'c11', name: 'QA / Testing', slug: 'qa-testing', icon: Bug, openPositions: 240 },
+  { id: 'c12', name: 'UI / UX', slug: 'ui-ux', icon: Palette, openPositions: 570 },
+  { id: 'c13', name: 'Product Manager', slug: 'product-manager', icon: Briefcase, openPositions: 420 },
+  { id: 'c14', name: 'Game Developer', slug: 'game-developer', icon: Gamepad2, openPositions: 190 },
+  { id: 'c15', name: 'Blockchain', slug: 'blockchain', icon: Blocks, openPositions: 160 },
+]

@@ -1,0 +1,68 @@
+import type { Company } from '../types'
+
+export const companies: Company[] = [
+  {
+    id: 'co-1', slug: 'luminary', name: 'Luminary', industry: 'Software', location: 'San Francisco, CA',
+    website: 'https://luminary.dev', size: '500–1,000', founded: 2016,
+    description: 'Luminary builds developer tools that help engineering teams ship faster and more reliably. We are remote-first and obsessed with craft.',
+    benefits: ['Remote-first', 'Unlimited PTO', 'Equity', 'Learning budget'],
+    openPositions: 24, rating: 4.8, reviewCount: 342, verified: true, featured: true,
+    tags: ['SaaS', 'Developer Tools', 'Remote'],
+  },
+  {
+    id: 'co-2', slug: 'nimbus-pay', name: 'Nimbus Pay', industry: 'Fintech', location: 'New York, NY',
+    website: 'https://nimbuspay.com', size: '1,000–5,000', founded: 2014,
+    description: 'Nimbus Pay is modernizing global payments for businesses of every size. Security and speed are in our DNA.',
+    benefits: ['Health & dental', '401k match', 'Hybrid work', 'Wellness stipend'],
+    openPositions: 31, rating: 4.6, reviewCount: 218, verified: true, featured: true,
+    tags: ['Fintech', 'Payments', 'Hybrid'],
+  },
+  {
+    id: 'co-3', slug: 'verdant-health', name: 'Verdant Health', industry: 'Healthcare', location: 'Boston, MA',
+    website: 'https://verdanthealth.io', size: '200–500', founded: 2018,
+    description: 'Verdant Health makes healthcare data actionable for clinicians and patients through intelligent software.',
+    benefits: ['Medical coverage', 'Flexible hours', 'Remote options', 'Education support'],
+    openPositions: 17, rating: 4.7, reviewCount: 129, verified: true, featured: false,
+    tags: ['Healthtech', 'Data', 'Remote'],
+  },
+  {
+    id: 'co-4', slug: 'atlas-commerce', name: 'Atlas Commerce', industry: 'E-commerce', location: 'Seattle, WA',
+    website: 'https://atlascommerce.co', size: '1,000–5,000', founded: 2011,
+    description: 'Atlas Commerce powers the storefronts of thousands of growing brands across 40+ countries.',
+    benefits: ['Stock options', 'Parental leave', 'Onsite gym', 'Relocation support'],
+    openPositions: 42, rating: 4.5, reviewCount: 486, verified: true, featured: true,
+    tags: ['E-commerce', 'Retail', 'Platform'],
+  },
+  {
+    id: 'co-5', slug: 'pixelworks', name: 'Pixelworks Studio', industry: 'Design', location: 'Berlin, DE',
+    website: 'https://pixelworks.studio', size: '50–200', founded: 2019,
+    description: 'A tight-knit design studio crafting brand and product experiences for ambitious startups.',
+    benefits: ['4-day week', 'Design budget', 'Remote-first', 'Yearly retreat'],
+    openPositions: 8, rating: 4.9, reviewCount: 76, verified: false, featured: false,
+    tags: ['Design', 'Branding', 'Remote'],
+  },
+  {
+    id: 'co-6', slug: 'quantum-ml', name: 'Quantum Labs', industry: 'Artificial Intelligence', location: 'London, UK',
+    website: 'https://quantumlabs.ai', size: '200–500', founded: 2017,
+    description: 'Quantum Labs builds applied AI products that automate knowledge work across enterprises.',
+    benefits: ['Competitive salary', 'Annual conference', 'Flexible PTO', 'Home office stipend'],
+    openPositions: 22, rating: 4.4, reviewCount: 154, verified: true, featured: true,
+    tags: ['AI', 'ML', 'Research'],
+  },
+  {
+    id: 'co-7', slug: 'brightpath', name: 'Brightpath Education', industry: 'EdTech', location: 'Toronto, CA',
+    website: 'https://brightpath.org', size: '50–200', founded: 2020,
+    description: 'Brightpath gives every learner a personalized path to mastery with adaptive learning tools.',
+    benefits: ['Mental health support', 'Flexible hours', 'Remote', 'Learning stipend'],
+    openPositions: 12, rating: 4.7, reviewCount: 91, verified: false, featured: false,
+    tags: ['EdTech', 'Remote', 'Impact'],
+  },
+  {
+    id: 'co-8', slug: 'steelbridge', name: 'Steelbridge Logistics', industry: 'Logistics', location: 'Chicago, IL',
+    website: 'https://steelbridge.io', size: '5,000+', founded: 2008,
+    description: 'Steelbridge optimizes freight and supply chains with data-driven routing and real-time visibility.',
+    benefits: ['401k match', 'Tuition assistance', 'Hybrid work', 'Employee discounts'],
+    openPositions: 63, rating: 4.2, reviewCount: 312, verified: true, featured: false,
+    tags: ['Logistics', 'Supply Chain', 'Hybrid'],
+  },
+]
