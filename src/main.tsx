@@ -12,7 +12,7 @@ const applyTheme = (theme: string) => {
   root.classList.toggle('dark', theme === 'dark')
   root.style.colorScheme = theme
 }
-
+ 
 applyTheme(useThemeStore.getState().theme)
 
 const queryClient = new QueryClient({
